@@ -1,5 +1,7 @@
 use std::ops::Index;
 
+use super::errors::IndexOutOfBoundError;
+
 #[derive(Clone, Copy)]
 pub struct Vector<const N: usize, T: Sized + Copy>{
     size: usize,
@@ -19,6 +21,13 @@ impl<const N: usize, T: Sized + Copy> Vector<N, T>{
             size: N,
             data: [None;N]
         }
+    }
+
+    pub fn get(&self, index: usize) -> Result<Option<T>, IndexOutOfBoundError> {
+        if index > self.size {
+            return Err(IndexOutOfBoundError { message: format!("Index out of bounds for {}",index) });
+        }
+        Ok(self.data[index])
     }
 }
 
