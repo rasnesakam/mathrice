@@ -10,7 +10,10 @@ pub struct Matrix<const COL: usize, const ROW: usize, T: Sized + Copy> {
 
 impl <const COL: usize, const ROW: usize, T: Sized + Copy> Matrix<COL, ROW, T> {
 	pub fn new(datas: [[T;COL];ROW]) -> Matrix<COL, ROW, T>{
-		let vector: Vector<ROW, Vector<COL, T>> = Vector::empty();
+		let mut vector: Vector<ROW, Vector<COL, T>> = Vector::empty();
+		for i in 0..datas.len() {
+			vector[i] = Some(Vector::new(datas[i]))
+		}
 		Matrix { row: ROW, col: COL, data: vector }
 	}
     pub fn get(&self, row: usize, col: usize) -> Result<Option<T>, IndexOutOfBoundError> {
