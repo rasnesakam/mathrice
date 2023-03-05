@@ -4,7 +4,7 @@ use super::errors::IndexOutOfBoundError;
 
 #[derive(Clone, Copy)]
 pub struct Vector<const N: usize, T: Sized + Copy>{
-    size: usize,
+    pub size: usize,
     data: [Option<T>;N]
 }
 
@@ -28,6 +28,10 @@ impl<const N: usize, T: Sized + Copy> Vector<N, T>{
             return Err(IndexOutOfBoundError { message: format!("Index out of bounds for {}",index) });
         }
         Ok(self.data[index])
+    }
+
+    pub fn set(mut self, index: usize, data: T) {
+        self.data[index] = Some(data);
     }
 }
 
