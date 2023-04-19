@@ -1,4 +1,4 @@
-use crate::types::vector::Vector;
+use crate::types::{Vector, Matrix};
 
 #[test]
 fn it_works() {
@@ -25,4 +25,12 @@ fn vector_add_vector() {
             assert!(true, "Result is null at {}",i);
         }
     }
+}
+
+#[test]
+fn print_matrix(){
+
+    let matrix: Matrix<3,3,i32> = Matrix::identity();
+    println!("{}",matrix);
+
 }

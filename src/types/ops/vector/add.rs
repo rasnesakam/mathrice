@@ -1,5 +1,5 @@
 use std::ops::Add;
-use crate::types::vector::Vector;
+use crate::types::Vector;
 
 macro_rules! add_impl {
     ($($t: ty)*) => ($(

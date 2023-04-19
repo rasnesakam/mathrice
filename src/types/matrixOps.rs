@@ -1,7 +1,8 @@
-use crate::types::vector::Vector;
-use crate::types::errors::IndexOutOfBoundError;
-use std::fmt::Display;
-use std::ops::Index;
+use crate::errors::IndexOutOfBoundError;
+use super::Matrix;
+
+
+
 
 macro_rules! integral_numeric_matrix_impls {
 	($($t: ty)*) => ($(
@@ -39,16 +40,13 @@ macro_rules! decimal_numeric_matrix_impls {
 	)*);
 }
 
-
-pub struct Matrix<const ROW: usize, const COL: usize, T: Sized + Copy> {
-    pub row_size: usize,
-    pub col_size: usize,
-    data: [[T;COL];ROW]
-}
-
 integral_numeric_matrix_impls!(usize u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128 );
 
 decimal_numeric_matrix_impls!(f32 f64);
+
+//impl <const R: usize, const C: usize, T: Sized + Copy > std::marker::Copy for Matrix<R,C,T> {
+
+//}
 
 impl <const ROW: usize, const COL: usize, T> Matrix<ROW, COL, T>
 	where T: Sized + Copy{
@@ -112,27 +110,4 @@ impl <const ROW: usize, const COL: usize, T> Matrix<ROW, COL, T> where
 	}
 }
 
-impl <const ROW: usize, const COL: usize, T> Matrix<ROW, COL, T>
-	where T: Sized + Copy + Display{
-	pub fn print(&self) {
-		for i in 0..self.row_size {
-			print!("[ ");
-			for j in 0..self.col_size {
-				print!("{}",self.data[i][j]);
-				if j < self.col_size - 1 {
-					print!(", ")
-				}
-			}
-			println!(" ]");
-		}
-	}
-}
-
-
-impl <const COL: usize, const ROW: usize, T: Sized + Copy> Index<usize> for Matrix<ROW, COL, T> {
-	type Output = [T;COL];
-	fn index(&self, index: usize) -> &Self::Output {
-		return &self.data[index];
-	}
-}
 

@@ -1,4 +1,4 @@
-use crate::types::vector::Vector;
+use crate::types::Vector;
 use core::panic;
 use std::ops::Sub;
 
