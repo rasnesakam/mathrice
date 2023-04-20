@@ -1,7 +1,8 @@
 use crate::types::Matrix;
 use std::fmt;
 
-impl<const R: usize, const C: usize, T: Sized + Copy + fmt::Display> fmt::Display for Matrix<R,C,T>{
+impl<const R: usize, const C: usize, T> fmt::Display for Matrix<R,C,T>
+	where T: Sized + Copy + fmt::Display{
 
     fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result {
         let mut content: String = String::new();
