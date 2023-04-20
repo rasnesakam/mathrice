@@ -27,10 +27,12 @@ fn vector_add_vector() {
     }
 }
 
+
+
 #[test]
 fn print_matrix(){
 
-    let matrix: Matrix<3,3,i32> = Matrix::identity();
+    let matrix: Matrix<3,3,i32> = Matrix::new([[1,0,0],[0,1,0],[0,0,1]]);
     println!("{}",matrix);
 
 }
