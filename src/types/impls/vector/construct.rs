@@ -1,12 +1,5 @@
-use crate::{types::Vector, errors::IndexOutOfBoundError};
+use crate::types::Vector;
 
-macro_rules! new_vector {
-	($e: expr) => {
-		Vector::new($e)
-	};
-}
-
-pub(crate) use new_vector;
 
 impl<const N: usize, T: Sized + Copy> Vector<N, T>{
     pub fn new(datas: [T;N])-> Vector<N, T>{
