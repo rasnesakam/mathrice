@@ -57,7 +57,7 @@ fn matrix_not_equal_op(){
 fn matrix_equal(){
 	let matrix_1: Matrix<3,3,i32> = Matrix::new([[1,0,0],[0,1,0],[0,0,1]]);
 	let matrix_2: Matrix<3,3,i32> = Matrix::new([[1,0,0],[0,1,0],[0,0,1]]);
-	let test: bool = matrix_1.is_equal(&matrix_2);;
+	let test: bool = matrix_1.is_equal(&matrix_2);
 	assert!(test,"Matrices are equal");
 }
 
