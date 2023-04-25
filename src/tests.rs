@@ -36,3 +36,35 @@ fn print_matrix(){
     println!("{}",matrix);
 
 }
+
+#[test]
+fn matrix_equal_op(){
+	let matrix_1: Matrix<3,3,i32> = Matrix::new([[1,0,0],[0,1,0],[0,0,1]]);
+	let matrix_2: Matrix<3,3,i32> = Matrix::new([[1,0,0],[0,1,0],[0,0,1]]);
+	let test: bool = matrix_1 == matrix_2;
+	assert!(test,"Matrices are equal");
+}
+
+#[test]
+fn matrix_not_equal_op(){
+	let matrix_1: Matrix<3,3,i32> = Matrix::new([[0,0,0],[0,0,0],[0,0,0]]);
+	let matrix_2: Matrix<3,3,i32> = Matrix::new([[1,1,1],[1,1,1],[1,1,1]]);
+	let test: bool = matrix_1 == matrix_2;
+	assert!(!test,"Matrices are not equal");
+}
+
+#[test]
+fn matrix_equal(){
+	let matrix_1: Matrix<3,3,i32> = Matrix::new([[1,0,0],[0,1,0],[0,0,1]]);
+	let matrix_2: Matrix<3,3,i32> = Matrix::new([[1,0,0],[0,1,0],[0,0,1]]);
+	let test: bool = matrix_1.is_equal(&matrix_2);;
+	assert!(test,"Matrices are equal");
+}
+
+#[test]
+fn matrix_not_equal(){
+	let matrix_1: Matrix<3,3,i32> = Matrix::new([[0,0,0],[0,0,0],[0,0,0]]);
+	let matrix_2: Matrix<3,3,i32> = Matrix::new([[1,1,1],[1,1,1],[1,1,1]]);
+	let test: bool = matrix_1.is_equal(&matrix_2);
+	assert!(!test,"Matrices are not equal");
+}
