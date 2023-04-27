@@ -22,7 +22,7 @@ impl <const R: usize, const C: usize, T: Copy> Matrix<R,C,T> {
 }
 
 impl <const R: usize, const C: usize, T: Copy> Matrix<R,C,T> {
-	pub fn fill_with(supplier: fn(usize,usize) -> T) -> Matrix<R,C,T> {
+	pub fn fill_with<F: Fn(usize,usize) -> T>(supplier: F) -> Matrix<R,C,T> {
 		let mut data:[[T;C];R] = [[supplier(0,0);C];R];
 		for r in 0..R {
 			for c in 0..C {

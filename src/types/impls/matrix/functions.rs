@@ -14,3 +14,39 @@ impl <const R: usize, const C: usize, T> Matrix<R,C,T>
 		true
 	}
 }
+
+
+// Basic arithmetic operations
+impl <const R: usize, const C: usize, T> Matrix<R,C,T>
+	where T:	std::marker::Copy + 
+				std::ops::Add<Output = T> +
+				std::ops::Sub<Output = T> +
+				std::ops::Mul<Output = T> +
+				std::ops::Div<Output = T>
+ {
+	pub fn add_matrix(&self, rhs: &Matrix<R,C,T>) -> Matrix<R,C,T> {
+		Matrix::fill_with(|r: usize, c: usize| self[r][c] + rhs[r][c])	
+	}
+	pub fn sub_matrix(&self, rhs: &Matrix<R,C,T>) -> Matrix<R,C,T> {
+		Matrix::fill_with(|r: usize, c: usize| self[r][c] - rhs[r][c])
+	}
+	pub fn add_constant(&self, constant: T) -> Matrix<R,C,T> {
+		Matrix::fill_with(|r: usize, c: usize| self[r][c] + constant)
+	}
+	pub fn sub_constant(&self, constant: T) -> Matrix<R,C,T> {
+		Matrix::fill_with(|r: usize, c: usize| self[r][c] - constant)
+	}
+	pub fn mul_constant(&self, constant: T) -> Matrix<R,C,T> {
+		Matrix::fill_with(|r: usize, c: usize| self[r][c] * constant)
+	}
+	pub fn div_constant(&self, constant: T) -> Matrix<R,C,T> {
+		Matrix::fill_with(|r: usize, c: usize| self[r][c] / constant)
+	}
+}
+
+// Matrix multiplication
+// impl <const R: usize, const C: usize, T> Matrix<R,C,T>{
+// 	pub fn mul_matrix<const ROW: usize>(&self, rhs: Matrix<ROW,R,T>) -> Matrix<R,R,T> {
+// 		Matrix::<R,R,T>::fill_with(|r: usize, c: usize|)
+// 	}
+// }
