@@ -45,8 +45,9 @@ impl <const R: usize, const C: usize, T> Matrix<R,C,T>
 }
 
 // Matrix multiplication
-// impl <const R: usize, const C: usize, T> Matrix<R,C,T>{
-// 	pub fn mul_matrix<const ROW: usize>(&self, rhs: Matrix<ROW,R,T>) -> Matrix<R,R,T> {
-// 		Matrix::<R,R,T>::fill_with(|r: usize, c: usize|)
-// 	}
-// }
+impl <const R: usize, const C: usize, T> Matrix<R,C,T>{
+	pub fn mul_matrix<const ROW: usize>(&self, rhs: Matrix<ROW,R,T>) -> Matrix<R,R,T> {
+		//Matrix::<R,R,T>::fill_with(|r: usize, c: usize| )
+		todo!("Matrix multiplication will be implemented")
+	}
+}
