@@ -12,5 +12,5 @@ pub struct Matrix<const ROW: usize, const COL: usize, T> {
 #[derive(Debug, Clone, Copy)]
 pub struct Vector<const N: usize, T>{
     pub size: usize,
-    data: [Option<T>;N]
+    data: [T;N]
 }

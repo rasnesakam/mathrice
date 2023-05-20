@@ -16,7 +16,7 @@ impl <const R: usize, const C: usize, T> Matrix<R,C,T>
 }
 
 // Getter methods
-impl <const R: usize, const C: usize, T> Matrix<R,C,T> {
+impl <const R: usize, const C: usize, T: std::marker::Copy> Matrix<R,C,T> {
 	
 	/// get_element(&self, r: usize, c: usize )
 	/// --------------------------------
@@ -80,14 +80,12 @@ impl <const R: usize, const C: usize, T> Matrix<R,C,T> {
 	/// 
 	/// ### Panics
 	/// Panics when col number exceed capacity of the matrix
-	pub fn get_col(&self, col: usize) -> [&T;C] {
-		let mut data: [&T;C] = [self.get_element(0, col);C];
-		let immutable_data: [&T;C];
+	pub fn get_col(&self, col: usize) -> Vector<R,T> {
+		let mut data: [T;R] = [self.get_element(0, col).clone();R];
 		for r in 1..R {
-			data[r] = self.get_element(r, col);
+			data[r] = self.get_element(r, col).clone();
 		}
-		immutable_data = data;
-		immutable_data
+		Vector::new(data)
 	}
 
 	/// get_row(&self, row: usize)
@@ -103,14 +101,12 @@ impl <const R: usize, const C: usize, T> Matrix<R,C,T> {
 	/// 
 	/// ### Panics
 	/// Panics when col number exceed capacity of the matrix
-	pub fn get_row(&self, row: usize) -> [&T;C] {
-		let mut data: [&T;C] = [self.get_element(row, 0);C];
-		let immutable_data: [&T;C];
+	pub fn get_row(&self, row: usize) -> Vector<C,T> {
+		let mut data: [T;C] = [self.get_element(row, 0).clone();C];
 		for c in 1..C {
-			data[c] = self.get_element(row,c);
+			data[c] = self.get_element(row,c).clone();
 		}
-		immutable_data = data;
-		immutable_data
+		Vector::new(data)
 	}
 }
 
@@ -144,9 +140,28 @@ impl <const R: usize, const C: usize, T> Matrix<R,C,T>
 }
 
 // Matrix multiplication
-impl <const R: usize, const C: usize, T> Matrix<R,C,T>{
-	pub fn mul_matrix<const ROW: usize>(&self, rhs: Matrix<ROW,R,T>) -> Matrix<R,R,T> {
-		//Matrix::<R,R,T>::fill_with(|r: usize, c: usize| )
-		todo!("Matrix multiplication will be implemented")
+impl <const R: usize, const C: usize, T> Matrix<R,C,T>
+	
+	where T: Copy + std::ops::AddAssign + std::ops::Mul<Output = T> {
+
+	pub fn mul_matrix<const COL: usize>(&self, rhs: Matrix<C,COL,T>) -> Matrix<R,COL,T> {
+
+		Matrix::<R,COL,T>::fill_with(|r,c| Vector::dot(
+			&self.get_row(r),
+			&rhs.get_col(c)
+		))
+
 	}
+
 }
+
+
+/*
+
+	x x x   x x
+	x x x   x x
+	x x x   x x
+
+
+
+ */
