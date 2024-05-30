@@ -1,31 +1,31 @@
 use crate::types::{Vector, Matrix};
 
-// #[test]
-// fn test_it_works() {
-//     let vector: Vector<2,i32> = Vector::new([4,2]);
-//     assert_eq!(vector[0].expect("EYVAH"), 4);
-//     assert_ne!(vector[1].expect("EYVAH"), 4)
-// }
+#[test]
+fn test_it_works() {
+    let vector: Vector<2,i32> = Vector::new([4,2]);
+    assert_eq!(vector[0], 4);
+    assert_ne!(vector[1], 4)
+}
 
-// #[test]
-// fn test_vector_add_vector() {
-//     let vec1: Vector<2, i32> = Vector::new([5, 6]);
-//     let vec2: Vector<2, i32> = Vector::new([5, 4]);
+#[test]
+fn test_vector_add_vector() {
+    let vec1: Vector<2, i32> = Vector::new([5, 6]);
+    let vec2: Vector<2, i32> = Vector::new([5, 4]);
 
-//     let vec3:Vector<2, i32> = vec1 + vec2;
+    let vec3:Vector<2, i32> = vec1 + vec2;
 
-//     for i in 0..vec3.size {
+    for i in 0..vec3.size {
         
-//         if vec3[i].is_some() {
-//             let sum = vec1[i].unwrap() + vec2[i].unwrap();
-//             let data = vec3[i].unwrap();
-//             assert_eq!(data, sum )
-//         }
-//         else {
-//             assert!(true, "Result is null at {}",i);
-//         }
-//     }
-// }
+        if vec3[i] > 0 {
+            let sum = vec1[i] + vec2[i];
+            let data = vec3[i];
+            assert_eq!(data, sum )
+        }
+        else {
+            assert!(true, "Result is null at {}",i);
+        }
+    }
+}
 
 
 
